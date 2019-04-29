@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_border"
+        android:orientation="vertical"
+        android:padding="5dp">
+        <TextView
+            android:id="@+id/clientname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/clientmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginBottom="4dp"
+            android:text="email"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="81dp"
+            android:layout_marginTop="-50dp"
+            android:layout_marginRight="310dp"
+            android:src="@mipmap/man" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="220dp"
+            android:background="@drawable/btn_rounded2"
+            android:text="supprimer"
+            android:textColor="#fff"
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/upgrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="-48dp"
+            android:background="@drawable/btn_rounded"
+            android:text="Modifer"
+            android:textColor="#fff"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+</FrameLayout>
