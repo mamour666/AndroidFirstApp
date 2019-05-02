@@ -1,6 +1,8 @@
 package com.mamour.myquiz;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -69,10 +71,15 @@ public class ViewDatabase extends AppCompatActivity {
         disconnect.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                SharedPreferences preferences = getSharedPreferences("loginPrefs",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
+                System.out.println(preferences.getString("username",""));
+                System.out.println(preferences.getString("password",""+"null"));
                 Intent loginActivityIntent = new Intent(ViewDatabase.this, loginActivity.class);
                 startActivity(loginActivityIntent);
-                finish();
-                return false;   
+                return true;
             }
         });
         searchView = (SearchView) searchItem.getActionView();

@@ -2,6 +2,7 @@ package com.mamour.myquiz;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,10 @@ import io.realm.Realm;
 
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener {
+    public SharedPreferences.Editor loginPrefsEditor;
+    public  SharedPreferences loginPreferences;
+    private Boolean saveLogin;
+    private Boolean checkdata;
     private EditText emailId;
     private EditText passwordId;
     private Button defaultbuttonid;
@@ -36,6 +41,16 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         passwordId = findViewById(R.id.passwordId);
         defaultbuttonid = findViewById(R.id.defaultbtnId);
         noaccountid = findViewById(R.id.noaccount);
+        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        loginPrefsEditor = loginPreferences.edit();
+
+        saveLogin = loginPreferences.getBoolean("saveLogin", false);
+        if (saveLogin == true) {
+            emailId.setText(loginPreferences.getString("username", ""));
+            passwordId.setText(loginPreferences.getString("password", ""));
+
+        }
+
         noaccountid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,8 +87,16 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 .equalTo("password",passwordId.getText().toString())
                 .findFirst();
         if(user != null){
+            loginPrefsEditor.putBoolean("saveLogin", true);
+            loginPrefsEditor.putBoolean("checkdata",true);
+            loginPrefsEditor.putString("username", emailId.getText().toString());
+            loginPrefsEditor.putString("password", passwordId.getText().toString());
+            loginPrefsEditor.commit();
+            System.out.println(loginPreferences.getString("username",""));
+            System.out.println(loginPreferences.getString("password",""));
             Intent iLogin = new Intent(this, ViewDatabase.class);
             startActivity(iLogin);
+
         }
         else{
             AlertDialog.Builder builder = new AlertDialog.Builder(this);

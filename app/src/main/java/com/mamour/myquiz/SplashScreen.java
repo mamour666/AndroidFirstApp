@@ -1,31 +1,47 @@
 package com.mamour.myquiz;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import com.mamour.myquiz.Model.Client;
+import io.realm.Realm;
+
 
 public class SplashScreen extends AppCompatActivity {
 
-    private final int SPLASH_SCREEN_TIMEOUT = 3000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
-        //rediriger la plage principal apres 3 secondes.
-
         // handler post delayed
+        SharedPreferences preferences = getSharedPreferences("loginPrefs",Context.MODE_PRIVATE);
+        if (preferences.getString("username","").equals("")){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 //demarrer une page
-                Intent intent = new Intent(SplashScreen.this,loginActivity.class);
-                startActivity(intent);
-                finish();
+                    Intent d = new Intent(SplashScreen.this, loginActivity.class);
+                    startActivity(d);
+                    finish();
             }
-        }, SPLASH_SCREEN_TIMEOUT);
+        }, 3000);
+        }
+        else
+        {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //demarrer une page
+                    Intent d = new Intent(SplashScreen.this, ViewDatabase.class);
+                    startActivity(d);
+                    finish();
+                }
+            }, 3000);
+
+        }
     }
 }
